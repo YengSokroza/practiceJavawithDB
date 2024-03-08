@@ -3,6 +3,7 @@ package repository;
 import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
 import model.Person;
+import utils.DatabasePopulationUtils;
 import utils.PropertyUtils;
 import utils.SQLUtils;
 
@@ -110,6 +111,26 @@ public class PersonRepository {
             return 0;
         }
 
+    }
+
+    public void loadFakerData(){
+        List<Person> cachedPersons = DatabasePopulationUtils.getAllPerson();
+        try (
+                Connection connection = startDatabaseConnection();
+                PreparedStatement statement = connection.prepareStatement(SQLUtils.PersonSQL.insertFakerData)
+        ) {
+            for (Person person : cachedPersons) {
+                statement.setString(1, person.getFullName());
+                statement.setString(2, person.getEmail());
+                statement.setString(3, person.getGender());
+                statement.setString(4, person.getAddress());
+                statement.executeUpdate();
+            }
+            System.out.println("Data inserted successfully!");
+        } catch (SQLException ex) {
+            System.out.println("Error inserting data into the table.");
+            ex.printStackTrace();
+        }
     }
 
 

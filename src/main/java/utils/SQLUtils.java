@@ -21,6 +21,10 @@ public class SQLUtils {
                 update person_tb set  fullname=?,gender=?,email=?,address=?
                 where id = ?
                 """;
+
+        public  static final String insertFakerData= """
+                INSERT INTO person_tb (fullname ,gender, email,  address) VALUES (?, ?, ?, ?)
+                """;
     }
     public static class SystemUserSQL{
         public static final String findMatched= """

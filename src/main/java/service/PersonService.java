@@ -81,4 +81,8 @@ public class PersonService {
             return 0;
         }
     }
+
+    public void loadData(){
+        personRepository.loadFakerData();
+    }
 }

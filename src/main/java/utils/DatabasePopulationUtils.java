@@ -20,7 +20,7 @@ public class DatabasePopulationUtils {
     private static final Faker faker = new Faker(new Random(SEEDVALUE));
     private static List<Person> cachedPersons = null;
 
-    public  List<Person> getAllPerson() {
+    public static List<Person> getAllPerson() {
         if( cachedPersons!=null){
             return cachedPersons;
         }

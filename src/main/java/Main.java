@@ -45,7 +45,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int option;
+
         if(systemUserService.authenticateUser(input)){
+            personService.loadData();
             do {
                 option = MainView.renderMain(input);
                 switch (option) {
